@@ -13,7 +13,7 @@ class Game(models.Model):
     genres = models.ManyToManyField(Genre, through='GameGenrePosition', verbose_name="genres")
     submitter = models.CharField(max_length=50, null=True, blank=True)
     url = models.URLField("steam store page")
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     ttb = models.FloatField("TTB")
     thoughts = models.TextField(max_length=1000)
     description = models.TextField(max_length=1000)
