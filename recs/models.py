@@ -15,7 +15,6 @@ class Game(models.Model):
     submitter = models.CharField(max_length=50, null=True, blank=True)
     url = models.URLField("steam store page")
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    ttb = models.FloatField("TTB")
     thoughts = models.TextField(max_length=1000)
     description = models.TextField(max_length=1000)
     public = models.BooleanField(default=False)
@@ -24,7 +23,7 @@ class Game(models.Model):
         return self.name
 
     def was_third_party_submission(self):
-        return self.submitter is not None
+        return self.submitter is not None and self.submitter != ""
 
 class GameGenrePosition(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
@@ -35,8 +34,11 @@ class GameGenrePosition(models.Model):
         if self.game.was_third_party_submission():
             self.position = -1
         elif self.position == 0:
-            last_position = GameGenrePosition.objects.filter(genre=self.genre).order_by("-position")[0].position
-            self.position = last_position + 1
+            if GameGenrePosition.objects.all().count() > 0:
+                last_position = GameGenrePosition.objects.filter(genre=self.genre).order_by("-position")[0].position
+                self.position = last_position + 1
+            else:
+                self.position = 1
         else:
             GameGenrePosition.objects.filter(position__gte=self.position).update(position=F('position') + 1)
         super().save(*args, **kwargs)

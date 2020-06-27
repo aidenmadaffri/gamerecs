@@ -11,14 +11,21 @@ def get_game_info(steamid):
 
     data = json.loads(response.content.decode('utf-8'))
 
-    if data[str(steamid)]['success'] == "True":
+    if data is None or data[str(steamid)]['success'] != True:
         return None
 
+    #Trims html characters
     description = data[str(steamid)]["data"]["short_description"]
     fixed_description = description.replace('&amp;', '&')
+
+    #Solves error if game is free
+    price = 0.00
+    if data[str(steamid)]["data"]["is_free"] != True:
+        #trim dollar sign
+        price = float(data[str(steamid)]["data"]["price_overview"]["final_formatted"][1:])
 
     return {
         "name": data[str(steamid)]["data"]["name"],
         "description": fixed_description,
-        "price": data[str(steamid)]["data"]["price_overview"]["final_formatted"]
+        "price": price
     }
