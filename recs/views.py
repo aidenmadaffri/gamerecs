@@ -11,7 +11,8 @@ def index(request):
     return HttpResponse("TODO")
 
 def detail(request, steamid):
-    return "TODO"
+    game = get_object_or_404(Game, steamid=steamid)
+    return render(request, "recs/detail.html", {"game": game})
 
 def submit(request):
     if request.method == 'POST':

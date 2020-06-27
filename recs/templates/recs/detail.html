@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'recs/style.css' %}">
+    <title>{{ game.name }}</title>
+  </head>
+  <body>
+    <div id='write' class = 'is-node'>
+        <h1><a href="{{ game.url }}">{{ game.name }}</a></h1>
+        <center><a href="{{ game.url }}">Steam Store</a></center>
+        <p>Price: <span style='color:green'>${{ game.price }}</span></p>
+        <p><strong>Game Description: </strong>{{ game.description }}</p>
+        {% if game.was_third_party_submission %}
+        <p><strong>{{ game.submitter }}'s Thoughts: </strong>{{ game.thoughts }}</p>
+        {% else %}
+        <p><strong>My Thoughts: </strong>{{ game.thoughts }}</p>
+        {% endif %}
+    </div>
+  </body>
+</html>
