@@ -9,6 +9,7 @@ class Genre(models.Model):
         return self.name
 
 class Game(models.Model):
+    steamid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200, unique=True)
     genres = models.ManyToManyField(Genre, through='GameGenrePosition', verbose_name="genres")
     submitter = models.CharField(max_length=50, null=True, blank=True)
@@ -17,6 +18,7 @@ class Game(models.Model):
     ttb = models.FloatField("TTB")
     thoughts = models.TextField(max_length=1000)
     description = models.TextField(max_length=1000)
+    public = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
