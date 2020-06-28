@@ -43,5 +43,5 @@ class GameGenrePosition(models.Model):
             else:
                 self.position = 1
         else:
-            GameGenrePosition.objects.filter(position__gte=self.position).update(position=F('position') + 1)
+            GameGenrePosition.objects.filter(genre=self.genre, position__gte=self.position).update(position=F('position') + 1)
         super().save(*args, **kwargs)
