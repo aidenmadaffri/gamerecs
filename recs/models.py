@@ -34,7 +34,7 @@ class GameGenrePosition(models.Model):
         if self.game.was_third_party_submission():
             self.position = -1
         elif self.position == 0:
-            if GameGenrePosition.objects.all().count() > 0:
+            if GameGenrePosition.objects.all().filter(genre=self.genre).count() > 0:
                 last_position = GameGenrePosition.objects.filter(genre=self.genre).order_by("-position")[0].position
                 self.position = last_position + 1
             else:

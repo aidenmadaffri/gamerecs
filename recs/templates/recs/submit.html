@@ -13,8 +13,10 @@
         <form method='post'>
             {% csrf_token %}
             {{ form.as_p }}
-        <input type='submit' value='Submit'>
+        <input type='submit' name="done-submitting" value='Submit and Go To Game Page'>
+        <input type='submit' name="another-submit" value='Submit Another'>
         </form>
+        <center><a href="{% url 'index' %}">Back to Home</a></center>
     </div>
   </body>
 </html>

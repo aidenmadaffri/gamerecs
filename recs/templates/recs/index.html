@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'recs/style.css' %}">
+    <title>ATM's Platform for Community Game Recommendations</title>
+  </head>
+  <body>
+    <div id='write' class = 'is-node'>
+        <h1>ATM's Platform for Community Game Recommendations</h1>
+        <center style="color:#00008B"><b><a href="https://discord.gg/e3n7egR">Join the Discord Server!</a></b></center>
+        <center style="color:#00008B"><b><a href="{% url 'submit' %}">Submit Your Own Game Suggestions Here!</a></b></center>
+        <h2>Read First</h2>
+        <p>This is an an absolute huge list of recommendations (80+ games). You should be able to find something you'd like in one of the many genres. For a list of my top recommendations, look at the top list. We also have #sale-discussion on the discord server if you're looking for some other suggestions. <br><br>If you click on a game, it will bring up a page with details for that game which includes my thoughts and a short description. It also includes the link to the steam page.<br><br> If you notice any price errors, typos, or bugs I'd appreciate if you'd let me know. <br><br>Anyway, I hope you enjoy the list.</p>
+        <h2>Legend/Key</h2>
+        <p><strong>👤</strong>: Submitted by an outside user (You can submit your own games <a href={% url 'submit' %}>here</a>) <br><br><strong><span style="color:#A67D3D">★</span></strong>: My top three recommendation for the category. <br><br><strong><span style="color:#A9A9A9">★</span></strong>: My top two recommendation for the category. <br><br><strong><span style="color:gold">★</span></strong>: My top recommendation for the category. </p>
+        <h2>Recommendations</h2>
+        <p><a href="{% url 'top' %}">Top Recommendations</a></p>
+        {% for genre in genres %}
+        <p><a href="{% url 'genre' genre.pk %}">{{ genre.name|title }}</a></p>
+        {% endfor %}
+  </body>
+</html>

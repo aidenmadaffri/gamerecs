@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'recs/style.css' %}">
+    <title>{{ game.name }}</title>
+  </head>
+  <body>
+    <div id='write' class = 'is-node'>
+        <h1>{{ genre.name|title }}</h1>
+        {% if price_under_15 %}
+            <h2>Under $15</h2>
+            <ol>
+            {% for game_pos in price_under_15 %}
+                {% if forloop.counter == 1 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 2 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 3 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% else %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% endif %}
+            {% endfor %}
+            </ol>
+        {% endif %}
+        {% if price_under_15_community %}
+            <ul>
+            {% for game_pos in price_under_15_community %}
+                <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% if price_15_to_30 %}
+            <h2>$15-$30</h2>
+            <ol>
+            {% for game_pos in price_15_to_30 %}
+                {% if forloop.counter == 1 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 2 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 3 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% else %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% endif %}
+            {% endfor %}
+            </ol>
+        {% endif %}
+        {% if price_15_to_30_community %}
+            <ul>
+            {% for game_pos in price_15_to_30_community %}
+                <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% if price_over_30 %}
+            <h2>Over $30</h2>
+            <ol>
+            {% for game_pos in price_over_30 %}
+                {% if forloop.counter == 1 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 2 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% elif forloop.counter == 3 %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% else %}
+                    <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+                {% endif %}
+            {% endfor %}
+            </ol>
+        {% endif %}
+        {% if price_over_30_community %}
+            <ul>
+            {% for game_pos in price_over_30_community %}
+                <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <center><a href="{% url 'index' %}">Back to Home</a></center>
+    </div>
+  </body>
+</html>

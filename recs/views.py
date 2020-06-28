@@ -8,11 +8,33 @@ from .models import Game, Genre, GameGenrePosition
 from .forms import SubmitForm
 
 def index(request):
-    return HttpResponse("TODO")
+    genres = Genre.objects.all().order_by('name')
+    return render(request, "recs/index.html", {"genres": genres})
 
-def detail(request, steamid):
+def top(request):
+    return render(request, "recs/top.html")
+
+def genre(request, genre_id):
+    genre = get_object_or_404(Genre, pk=genre_id)
+    price_under_15 = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position__gt=0).order_by("position")
+    price_15_to_30 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position__gt=0).order_by("position")
+    price_over_30 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00).order_by("position")
+    price_under_15_community = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position=-1).order_by("game__name")
+    price_15_to_30_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position=-1).order_by("game__name")
+    price_over_30_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00, position=-1).order_by("game__name")
+    return render(request, "recs/genre.html", {
+        'genre': genre,
+        'price_under_15': price_under_15,
+        'price_15_to_30': price_15_to_30,
+        'price_over_30': price_over_30,
+        'price_under_15_community': price_under_15_community,
+        'price_15_to_30_community': price_15_to_30_community,
+        'price_over_30_community': price_over_30_community
+    })
+
+def game(request, steamid):
     game = get_object_or_404(Game, steamid=steamid)
-    return render(request, "recs/detail.html", {"game": game})
+    return render(request, "recs/game.html", {"game": game})
 
 def submit(request):
     if request.method == 'POST':
@@ -42,7 +64,9 @@ def submit(request):
                 game_genre_position = GameGenrePosition(game=new_game, genre=Genre.objects.get(pk=genre_id), position=0)
                 game_genre_position.save()
 
-            return HttpResponseRedirect("/")
+            if 'done-submitting' in request.POST:
+                return HttpResponseRedirect("/game/" + new_game.steamid)
+            return HttpResponseRedirect("/submit/")
 
     else:
         form = SubmitForm()
