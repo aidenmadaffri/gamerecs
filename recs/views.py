@@ -16,20 +16,47 @@ def top(request):
 
 def genre(request, genre_id):
     genre = get_object_or_404(Genre, pk=genre_id)
-    price_under_15 = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position__gt=0).order_by("position")
-    price_15_to_30 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position__gt=0).order_by("position")
-    price_over_30 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00).order_by("position")
-    price_under_15_community = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position=-1).order_by("game__name")
-    price_15_to_30_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position=-1).order_by("game__name")
-    price_over_30_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00, position=-1).order_by("game__name")
+    set_1_description = None
+    set_2_description = None
+    set_3_description = None
+    set_1 = None
+    set_2 = None
+    set_3 = None
+    set_1_community = None
+    set_2_community = None
+    set_3_community = None
+    if GameGenrePosition.objects.filter(genre=genre, game__price__gt=30.00).exists():
+        set_1_description = "Under $15"
+        set_2_description = "$15-$30"
+        set_3_description = "Over $30"
+        set_1 = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position__gt=0).order_by("position")
+        set_2 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position__gt=0).order_by("position")
+        set_3 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00, position__gt=0).order_by("position")
+        set_1_community = GameGenrePosition.objects.filter(genre=genre, game__price__lt=15.00, position=-1).order_by("game__name")
+        set_2_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=15.00, game__price__lt=30.00, position=-1).order_by("game__name")
+        set_3_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=30.00, position=-1).order_by("game__name")
+    else:
+        set_1_description = "Under $10"
+        set_2_description = "$10-$20"
+        set_3_description = "Over $20"
+        set_1 = GameGenrePosition.objects.filter(genre=genre, game__price__lt=10.00, position__gt=0).order_by("position")
+        set_2 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=10.00, game__price__lt=20.00, position__gt=0).order_by("position")
+        set_3 = GameGenrePosition.objects.filter(genre=genre, game__price__gte=20.00, position__gt=0).order_by("position")
+        set_1_community = GameGenrePosition.objects.filter(genre=genre, game__price__lt=10.00, position=-1).order_by("game__name")
+        set_2_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=10.00, game__price__lt=20.00, position=-1).order_by("game__name")
+        set_3_community = GameGenrePosition.objects.filter(genre=genre, game__price__gte=20.00, position=-1).order_by("game__name")
+
     return render(request, "recs/genre.html", {
         'genre': genre,
-        'price_under_15': price_under_15,
-        'price_15_to_30': price_15_to_30,
-        'price_over_30': price_over_30,
-        'price_under_15_community': price_under_15_community,
-        'price_15_to_30_community': price_15_to_30_community,
-        'price_over_30_community': price_over_30_community
+        'set_1': set_1,
+        'set_2': set_2,
+        'set_3': set_3,
+        'set_1_community': set_1_community,
+        'set_2_community': set_2_community,
+        'set_3_community': set_3_community,
+        'set_1_description': set_1_description,
+        'set_2_description': set_2_description,
+        'set_3_description': set_3_description
     })
 
 def game(request, steamid):

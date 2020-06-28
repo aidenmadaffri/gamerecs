@@ -13,10 +13,10 @@
   <body>
     <div id='write' class = 'is-node'>
         <h1>{{ genre.name|title }}</h1>
-        {% if price_under_15 %}
-            <h2>Under $15</h2>
+        {% if set_1 %}
+            <h2>{{ set_1_description }}</h2>
             <ol>
-            {% for game_pos in price_under_15 %}
+            {% for game_pos in set_1 %}
                 {% if forloop.counter == 1 %}
                     <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
                 {% elif forloop.counter == 2 %}
@@ -29,17 +29,17 @@
             {% endfor %}
             </ol>
         {% endif %}
-        {% if price_under_15_community %}
+        {% if set_1_community %}
             <ul>
-            {% for game_pos in price_under_15_community %}
+            {% for game_pos in set_1_community %}
                 <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
             {% endfor %}
             </ul>
         {% endif %}
-        {% if price_15_to_30 %}
-            <h2>$15-$30</h2>
+        {% if set_2 %}
+            <h2>{{ set_2_description }}</h2>
             <ol>
-            {% for game_pos in price_15_to_30 %}
+            {% for game_pos in set_2 %}
                 {% if forloop.counter == 1 %}
                     <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
                 {% elif forloop.counter == 2 %}
@@ -52,17 +52,17 @@
             {% endfor %}
             </ol>
         {% endif %}
-        {% if price_15_to_30_community %}
+        {% if set_2_community %}
             <ul>
-            {% for game_pos in price_15_to_30_community %}
+            {% for game_pos in set_2_community %}
                 <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
             {% endfor %}
             </ul>
         {% endif %}
-        {% if price_over_30 %}
-            <h2>Over $30</h2>
+        {% if set_3 %}
+            <h2>{{ set_3_description }}</h2>
             <ol>
-            {% for game_pos in price_over_30 %}
+            {% for game_pos in set_3 %}
                 {% if forloop.counter == 1 %}
                     <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
                 {% elif forloop.counter == 2 %}
@@ -75,9 +75,9 @@
             {% endfor %}
             </ol>
         {% endif %}
-        {% if price_over_30_community %}
+        {% if set_3_community %}
             <ul>
-            {% for game_pos in price_over_30_community %}
+            {% for game_pos in set_3_community %}
                 <li><a href={% url 'game' game_pos.game.steamid %}>{{ game_pos.game.name }}</a><strong>👤</strong>: <span style='color:green'>${{ game_pos.game.price }}</span></li>
             {% endfor %}
             </ul>
