@@ -1,0 +1,2 @@
+# Game Recs
+This django website stores information about steam games and their rankings in certain genres. It also allow user submissions from the frontend, not just /admin/. My instance can be found at https://gamerecs.madaffri.com/
