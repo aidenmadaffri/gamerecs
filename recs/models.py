@@ -24,6 +24,9 @@ class Game(models.Model):
 
     def was_third_party_submission(self):
         return self.submitter is not None and self.submitter != ""
+    was_third_party_submission.admin_order_field = 'name'
+    was_third_party_submission.boolean = True
+    was_third_party_submission.short_description = 'Was third party submission?'
 
 class GameGenrePosition(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
