@@ -38,7 +38,7 @@ class GameGenrePosition(models.Model):
             self.position = -1
         elif self.position == 0:
             if GameGenrePosition.objects.all().filter(genre=self.genre).count() > 0:
-                last_position = GameGenrePosition.objects.filter(genre=self.genre).order_by("-position")[0].position
+                last_position = GameGenrePosition.objects.filter(genre=self.genre).exclude(position=-1).order_by("-position")[0].position
                 self.position = last_position + 1
             else:
                 self.position = 1
