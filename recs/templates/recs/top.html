@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'recs/style.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'recs/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'recs/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'recs/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'recs/site.webmanifest' %}">
+    <title>Top Recommendations</title>
+  </head>
+  <body>
+    <div id='write' class = 'is-node'>
+        <h1>Top Recommendations</h1>
+        <center><strong>Last Updated for Summer Sale 2020</strong></center>
+        <center>This page is manually updated and may not have correct prices. Ping me on the server if I need to fix something.</center>
+        <h2>Under $10</h2>
+        <ol>
+            <li><a href={% url 'game' 377160 %}>Fallout 4</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>$8.99</span></li>
+            <li><a href={% url 'game' 105600 %}>Terraria</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>$4.99</span></li>
+            <li><a href={% url 'game' 480490 %}>Prey</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>$8.99</span></li>
+        </ol>
+        <h2>$10-$20</h2>
+        <ol>
+            <li><a href={% url 'game' 489830 %}>The Elder Scrolls V: Skyrim Special Edition</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>$15.99</span></li>
+            <li><a href={% url 'game' 239140 %}>Dying Light</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>$13.59</span></li>
+            <li><a href={% url 'game' 268500 %}>XCOM® 2</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>$14.99</span></li>
+        </ol>
+        <h2>Over $20</h2>
+        <ol>
+            <li><a href={% url 'game' 427520 %}>Factorio</a><strong><span style="color:gold">★</span></strong>: <span style='color:green'>$30.00</span></li>
+            <li><a href={% url 'game' 294100 %}>Rimworld</a><strong><span style="color:#A9A9A9">★</span></strong>: <span style='color:green'>$31.49</span></li>
+            <li><a href={% url 'game' 8930 %}>Sid Meier's Civilization® V</a><strong><span style="color:#A67D3D">★</span></strong>: <span style='color:green'>$29.99</span></li>
+        </ol>
+        <center><a href="{% url 'index' %}">Back to Home</a></center>
+    </div>
+  </body>
+</html>
