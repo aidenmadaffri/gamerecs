@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-url_base = "https://store.steampowered.com/api/appdetails?appids="
+url_base = "https://store.steampowered.com/api/appdetails?cc=USA&&appids="
 header = {'Content-Type': 'application/json'}
 
 def get_game_info(steamid):
