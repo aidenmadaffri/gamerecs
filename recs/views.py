@@ -100,6 +100,6 @@ def submit(request):
 
     return render(request, "recs/submit.html", {'form': form})
 
-def atoz(requst):
-    games = GameGenrePosition.objects.order_by("game__name")
+def atoz(request):
+    games = GameGenrePosition.objects.order_by("game__name").distinct()
     return render(request, "recs/atoz.html", {"games": games})

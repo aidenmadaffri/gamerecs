@@ -13,9 +13,9 @@
   <body>
     <div id='write' class = 'is-node'>
         <h1>A to Z</h1>
-        {% for game_pos in data %}
+	<center><strong>Currently this page has many duplicate items due to how I store the games in the backend. It is a new addition to the site and I have not had the time to fix the issue before the sale started. Hopefully it is still helpful.</strong></center>
+        {% for game_pos in games %}
             <h2><a href="{{ game_pos.game.url }}">{{ game_pos.game.name }}</a></h2>
-            <center><a href="{{ game_pos.game.url }}">Steam Store</a></center>
             <p>Price: <span style='color:green'>${{ game_pos.game.price }}</span></p>
             <p><strong>Game Description: </strong>{{ game_pos.game.description }}</p>
             {% if game.was_third_party_submission %}

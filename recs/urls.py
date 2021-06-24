@@ -12,7 +12,7 @@ urlpatterns = [
     # ex: /top/
     path("top/", views.top, name="top"),
     # ex: /genre/1/
-    path("genre/<int:genre_id>/", views.genre, name="genre")
+    path("genre/<int:genre_id>/", views.genre, name="genre"),
     # ex: /atoz/
     path("atoz/", views.atoz, name="atoz")
 ]
