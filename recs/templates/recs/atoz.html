@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'recs/style.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'recs/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'recs/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'recs/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'recs/site.webmanifest' %}">
+    <title>A to Z</title>
+  </head>
+  <body>
+    <div id='write' class = 'is-node'>
+        <h1>A to Z</h1>
+        {% for game_pos in data %}
+            <h2><a href="{{ game_pos.game.url }}">{{ game_pos.game.name }}</a></h2>
+            <center><a href="{{ game_pos.game.url }}">Steam Store</a></center>
+            <p>Price: <span style='color:green'>${{ game_pos.game.price }}</span></p>
+            <p><strong>Game Description: </strong>{{ game_pos.game.description }}</p>
+            {% if game.was_third_party_submission %}
+            <p><strong>{{ game_pos.game.submitter }}'s Thoughts: </strong>{{ game_pos.game.thoughts }}</p>
+            {% else %}
+            <p><strong>My Thoughts: </strong>{{ game_pos.game.thoughts }}</p>
+            {% endif %}
+        {% endfor %}
+        <center><a href="{% url 'index' %}">Back to Home</a></center>
+    </div>
+  </body>
+</html>

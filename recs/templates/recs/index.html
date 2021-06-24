@@ -21,6 +21,7 @@
         <p><strong>👤</strong>: Submitted by an outside user (You can submit your own games <a href={% url 'submit' %}>here</a>) <br><br><strong><span style="color:#A67D3D">★</span></strong>: My top three recommendation for the category. <br><br><strong><span style="color:#A9A9A9">★</span></strong>: My top two recommendation for the category. <br><br><strong><span style="color:gold">★</span></strong>: My top recommendation for the category. </p>
         <h2>Recommendations</h2>
         <p><a href="{% url 'top' %}">Top Recommendations</a></p>
+        <p><a href="{% url 'atoz' %}">A to Z</a></p>
         {% for genre in genres %}
         <p><a href="{% url 'genre' genre.pk %}">{{ genre.name|title }}</a></p>
         {% endfor %}
