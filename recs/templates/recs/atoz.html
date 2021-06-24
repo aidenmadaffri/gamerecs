@@ -13,15 +13,23 @@
   <body>
     <div id='write' class = 'is-node'>
         <h1>A to Z</h1>
-	<center><strong>Currently this page has many duplicate items due to how I store the games in the backend. It is a new addition to the site and I have not had the time to fix the issue before the sale started. Hopefully it is still helpful.</strong></center>
-        {% for game_pos in games %}
-            <h2><a href="{{ game_pos.game.url }}">{{ game_pos.game.name }}</a></h2>
-            <p>Price: <span style='color:green'>${{ game_pos.game.price }}</span></p>
-            <p><strong>Game Description: </strong>{{ game_pos.game.description }}</p>
+        {% for game in games %}
+            <h2><a href="{{ game.url }}">{{ game.name }}</a></h2>
+            <p>Price: <span style='color:green'>${{ game.price }}</span></p>
+            <p><strong>Genres: </strong>
+            {% for genre in game.genres %}
+                {% if forloop.last %}
+                    {{ genre }}
+                {% else %}
+                    {{ genre }},
+                {% endif %}
+            {% endfor %}
+            </p>
+            <p><strong>Game Description: </strong>{{ game.description }}</p>
             {% if game.was_third_party_submission %}
-            <p><strong>{{ game_pos.game.submitter }}'s Thoughts: </strong>{{ game_pos.game.thoughts }}</p>
+            <p><strong>{{ game.submitter }}'s Thoughts: </strong>{{ game.thoughts }}</p>
             {% else %}
-            <p><strong>My Thoughts: </strong>{{ game_pos.game.thoughts }}</p>
+            <p><strong>ATM's Thoughts: </strong>{{ game.thoughts }}</p>
             {% endif %}
         {% endfor %}
         <center><a href="{% url 'index' %}">Back to Home</a></center>

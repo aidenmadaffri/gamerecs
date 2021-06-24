@@ -100,6 +100,32 @@ def submit(request):
 
     return render(request, "recs/submit.html", {'form': form})
 
+class GameAToZ:
+    def __init__(self, steamid, name, submitter, url, price, thoughts, description):
+        self.steamid = steamid
+        self.name = name
+        self.genres = []
+        self.submitter = submitter
+        self.url = url
+        self.price = price
+        self.thoughts = thoughts
+        self.description = description
+
+    def was_third_party_submission(self):
+        return self.submitter is not None and self.submitter != ""
+
 def atoz(request):
-    games = GameGenrePosition.objects.order_by("game__name").distinct()
-    return render(request, "recs/atoz.html", {"games": games})
+    data = GameGenrePosition.objects.order_by("game__name").distinct()
+
+    games = dict()
+    for game_pos in data:
+        if game_pos.game.name in games:
+            games[game_pos.game.name].genres.append(game_pos.genre.name)
+        else:
+            game = GameAToZ(game_pos.game.steamid, game_pos.game.name, game_pos.game.submitter, game_pos.game.url, game_pos.game.price, game_pos.game.thoughts, game_pos.game.description)
+            game.genres.append(game_pos.genre.name)
+            games[game_pos.game.name] = game
+
+    return render(request, "recs/atoz.html", {"games": games.values()})
+
+

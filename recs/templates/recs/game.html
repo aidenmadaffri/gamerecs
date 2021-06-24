@@ -14,12 +14,12 @@
     <div id='write' class = 'is-node'>
         <h1><a href="{{ game.url }}">{{ game.name }}</a></h1>
         <center><a href="{{ game.url }}">Steam Store</a></center>
-        <p>Price: <span style='color:green'>${{ game.price }}</span></p>
+        <p><strong>Price: </strong><span style='color:green'>${{ game.price }}</span></p>
         <p><strong>Game Description: </strong>{{ game.description }}</p>
         {% if game.was_third_party_submission %}
         <p><strong>{{ game.submitter }}'s Thoughts: </strong>{{ game.thoughts }}</p>
         {% else %}
-        <p><strong>My Thoughts: </strong>{{ game.thoughts }}</p>
+        <p><strong>ATM's Thoughts: </strong>{{ game.thoughts }}</p>
         {% endif %}
         <center><a href="{% url 'index' %}">Back to Home</a></center>
     </div>
